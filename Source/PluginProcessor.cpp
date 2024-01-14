@@ -8,21 +8,37 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include <memory>
 
 //==============================================================================
 SimpleFilterAudioProcessor::SimpleFilterAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
-                       )
+    #if ! JucePlugin_IsMidiEffect
+        #if ! JucePlugin_IsSynth
+            .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
+        #endif
+        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
+    #endif
+    ),
+#else
+     :
 #endif
-{
-}
+     parameters(*this,
+                nullptr,
+                juce::Identifier("SimpleFilterPlugin"),
+                {std::make_unique<juce::AudioParameterFloat>("cutoff_frequency",
+                                                             "Cutoff Frequency",
+                                                             juce::NormalisableRange{20.f,
+                                                                                     20000.f,
+                                                                                     0.1f,
+                                                                                     0.2f,
+                                                                                     false},
+                                                              500.f),
+                std::make_unique<juce::AudioParameterBool>("highpass", "Highpass", false)}) {
+    cutoffFrequencyParameter = parameters.getRawParameterValue("cutoff_frequency");
+    highpassParameter = parameters.getRawParameterValue("highpass");
+     }
 
 SimpleFilterAudioProcessor::~SimpleFilterAudioProcessor()
 {
@@ -93,8 +109,7 @@ void SimpleFilterAudioProcessor::changeProgramName (int index, const juce::Strin
 //==============================================================================
 void SimpleFilterAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    filter.setSamplingRate(static_cast<float>(sampleRate));
 }
 
 void SimpleFilterAudioProcessor::releaseResources()
@@ -144,18 +159,16 @@ void SimpleFilterAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
+    // retrieve and set the parameter values
+    const auto cutoffFrequency = cutoffFrequencyParameter->load();
+    // in C++, std::atomic<T> to T conversion is equivalent to a load
+    const auto highpass = *highpassParameter <  0.5f ? false : true;
+    filter.setCutoffFrequency(cutoffFrequency);
+    filter.setHighpass(highpass);
 
-        // ..do something to the data...
-    }
+    // perform the filtering
+    filter.processBlock(buffer, midiMessages);
+    
 }
 
 //==============================================================================
