@@ -179,7 +179,7 @@ bool SimpleFilterAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* SimpleFilterAudioProcessor::createEditor()
 {
-    return new SimpleFilterAudioProcessorEditor (*this);
+    return new SimpleFilterAudioProcessorEditor (*this, parameters);
 }
 
 //==============================================================================
