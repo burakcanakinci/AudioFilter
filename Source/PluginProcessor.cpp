@@ -35,9 +35,10 @@ SimpleFilterAudioProcessor::SimpleFilterAudioProcessor()
                                                                                      0.2f,
                                                                                      false},
                                                               500.f),
-                std::make_unique<juce::AudioParameterBool>("highpass", "Highpass", false)}) {
-    cutoffFrequencyParameter = parameters.getRawParameterValue("cutoff_frequency");
-    highpassParameter = parameters.getRawParameterValue("highpass");
+
+     std::make_unique<juce::AudioParameterBool>("highpass", "Highpass", false)}) {
+         cutoffFrequencyParameter = parameters.getRawParameterValue("cutoff_frequency");
+         highpassParameter = parameters.getRawParameterValue("highpass");
      }
 
 SimpleFilterAudioProcessor::~SimpleFilterAudioProcessor()
