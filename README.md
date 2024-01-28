@@ -17,7 +17,7 @@ The project consists of the following files:
 
 ### 1. Clone the repository:
 
-```cmake
+```code
 git clone https://github.com/burakcanakinci/SimpleFilter.git
 cd SimpleFilter
 ```
