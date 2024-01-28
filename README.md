@@ -6,11 +6,11 @@ SimpleFilter is a basic audio filter implemented in C++ using the JUCE framework
 
 The project consists of the following files:
 
-- PluginProcessor.h/cpp: Implements the audio processor using JUCE's AudioProcessor class. It handles audio processing, parameter management, and plugin state.
+- [PluginProcessor.h/cpp:](https://github.com/burakcanakinci/SimpleFilter/blob/main/Source/PluginProcessor.h) Implements the audio processor using JUCE's AudioProcessor class. It handles audio processing, parameter management, and plugin state.
 
-- PluginEditor.h/cpp: Implements the plugin editor using JUCE's AudioProcessorEditor class. It includes UI components such as sliders and buttons for user interaction.
+- [PluginEditor.h/cpp:](https://github.com/burakcanakinci/SimpleFilter/blob/main/Source/PluginEditor.h) Implements the plugin editor using JUCE's AudioProcessorEditor class. It includes UI components such as sliders and buttons for user interaction.
 
-- SimpleFilter.h/cpp: Defines the SimpleFilter class, which encapsulates the all-pass filter logic. The SimpleFilter class is used by the audio processor to perform filtering.
+- [SimpleFilter.h/cpp:](https://github.com/burakcanakinci/SimpleFilter/blob/main/Source/SimpleFilter.h) Defines the SimpleFilter class, which encapsulates the all-pass filter logic. The SimpleFilter class is used by the audio processor to perform filtering.
 
 
 ## Building the Project
