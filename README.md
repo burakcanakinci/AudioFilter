@@ -13,39 +13,39 @@ The project consists of the following files:
 - SimpleFilter.h/cpp: Defines the SimpleFilter class, which encapsulates the all-pass filter logic. The SimpleFilter class is used by the audio processor to perform filtering.
 
 
-### Building the Project
+## Building the Project
 
-#### 1. Clone the repository:
+### 1. Clone the repository:
 
 ```bash
 git clone https://github.com/burakcanakinci/SimpleFilter.git
 cd SimpleFilter
 ```
 
-#### 2. Open the Project in Your IDE:
+### 2. Open the Project in Your IDE:
 
 Open the project using your preferred C++ IDE or build tool that supports JUCE projects.
 
-#### 3. Build the Project:
+### 3. Build the Project:
 
 Build the project in your IDE. Ensure that you have the necessary dependencies, including the JUCE framework.
 
-#### 4. Run the Plugin:
+### 4. Run the Plugin:
 
 After building, you can run the audio plugin in your DAW (Digital Audio Workstation) that supports VST/AU plugins.
 
-### Usage
+## Usage
 
-#### 1. Load the Plugin:
+### 1. Load the Plugin:
 
 Load the built plugin (VST/AU) into your DAW.
 
-#### 2. Adjust Parameters:
+### 2. Adjust Parameters:
 
 - Cutoff Frequency Slider: Adjust the cutoff frequency of the filter.
 - Highpass Toggle Button: Enable/disable highpass filtering.
 
-#### 3. Listen to the Output:
+### 3. Listen to the Output:
 
 Play audio through the plugin and observe the impact of the filter settings.
 
