@@ -1,6 +1,6 @@
-# SimpleFilter
+# AudioFilter
 
-SimpleFilter is a basic audio filter implemented in C++ using the JUCE framework. It provides a simple all-pass filter with adjustable cutoff frequency and the option to operate as a highpass filter.
+AudioFilter is a simple filter implemented in C++ using the JUCE framework. It provides a simple all-pass filter with adjustable cutoff frequency and the option to operate as a highpass filter.
 
 ## Project Structure
 
@@ -18,7 +18,7 @@ The project consists of the following files:
 ### 1. Clone the repository:
 
 ```code
-git clone https://github.com/burakcanakinci/SimpleFilter.git
+git clone https://github.com/burakcanakinci/AudioFilter
 cd SimpleFilter
 ```
 
